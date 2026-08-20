@@ -86,7 +86,7 @@ func (curve *KoblitzCurve) ScalarBaseMult(k []byte) (*big.Int, *big.Int) {
 	var kModN ModNScalar
 	kModN.SetByteSlice(moduloReduce(k))
 	var result JacobianPoint
-	scalarBaseMultNonConstFast(&kModN, &result)
+	scalarBaseMultNonConst(&kModN, &result)
 	return jacobianToBigAffine(&result)
 }
 
