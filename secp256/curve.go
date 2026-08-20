@@ -1248,24 +1248,24 @@ func scalarBaseMultNonConstSlow(k *ModNScalar, result *JacobianPoint) {
 
 // scalarBaseMultNonConstFast computes k*G through the precomputed lookup
 // tables.
-// func scalarBaseMultNonConstFast(k *ModNScalar, result *JacobianPoint) {
-// 	bytePoints := s256BytePoints()
+func scalarBaseMultNonConstFast(k *ModNScalar, result *JacobianPoint) {
+	bytePoints := s256BytePoints()
 
-// 	// Start with the point at infinity.
-// 	result.X.Zero()
-// 	result.Y.Zero()
-// 	result.Z.Zero()
+	// Start with the point at infinity.
+	result.X.Zero()
+	result.Y.Zero()
+	result.Z.Zero()
 
-// 	// bytePoints has all 256 byte points for each 8-bit window.  The strategy
-// 	// is to add up the byte points.  This is best understood by expressing k in
-// 	// base-256 which it already sort of is.  Each "digit" in the 8-bit window
-// 	// can be looked up using bytePoints and added together.
-// 	kb := k.Bytes()
-// 	for i := 0; i < len(kb); i++ {
-// 		pt := &bytePoints[i][kb[i]]
-// 		AddNonConst(result, pt, result)
-// 	}
-// }
+	// bytePoints has all 256 byte points for each 8-bit window.  The strategy
+	// is to add up the byte points.  This is best understood by expressing k in
+	// base-256 which it already sort of is.  Each "digit" in the 8-bit window
+	// can be looked up using bytePoints and added together.
+	kb := k.Bytes()
+	for i := 0; i < len(kb); i++ {
+		pt := &bytePoints[i][kb[i]]
+		AddNonConst(result, pt, result)
+	}
+}
 
 // isOnCurve returns whether or not the affine point (x,y) is on the curve.
 func isOnCurve(fx, fy *FieldVal) bool {
