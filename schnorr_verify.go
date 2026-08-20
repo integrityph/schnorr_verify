@@ -1,4 +1,4 @@
-package main
+package schnorr_verify
 
 import (
 	"math/big"
